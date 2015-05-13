@@ -36,8 +36,11 @@ public class UserControl implements Comparator<String>{
         if(user.getSenha().length() < 8){
             throw new SenhaException("senha deve conter no minimo 8 caracteres\n");
         }
-        if(!user.getSenha().matches(".*\\d.*\\d.*")){
-            throw new SenhaException("senha deve conter pelo menos dois numeros\n");
+        if(!user.getSenha().matches(".*\\D+.*")){
+            if(!user.getSenha().matches(".*\\d.*\\d.*")){ 
+                throw new SenhaException("senha deve conter pelo menos dois numeros\n");
+            }
+            throw new SenhaException("senha deve conter algum caractere\n");
         }
             
         usuarios.put(user.getLogin(),user.getSenha());
